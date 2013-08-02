@@ -25,6 +25,7 @@ function buildPrivatePub(doc) {
 
     connectToFaye: function() {
       self.fayeClient = new Faye.Client(self.subscriptions.server);
+      Faye.Transport.WebSocket.isUsable = function(_,c) { c(false) }
       self.fayeClient.addExtension(self.fayeExtension);
       for (var i=0; i < self.fayeCallbacks.length; i++) {
         self.fayeCallbacks[i](self.fayeClient);
